@@ -1,10 +1,10 @@
 package gowechat
 
 import (
+	"kprince/gowechat/wxcontext"
 	"testing"
 
 	"github.com/astaxie/beego"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 func TestGetQrcode(t *testing.T) {
