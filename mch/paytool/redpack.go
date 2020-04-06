@@ -3,11 +3,9 @@ package paytool
 import (
 	"errors"
 	"fmt"
+	"kprince/gowechat/mch/base"
+	"kprince/gowechat/util"
 	"time"
-
-	"github.com/astaxie/beego"
-	"github.com/yaotian/gowechat/mch/base"
-	"github.com/yaotian/gowechat/util"
 )
 
 //官方文档： https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_4&index=3
@@ -79,7 +77,7 @@ func (c *PayTool) SendRedPack(input RedPackInput) (isSuccess bool, err error) {
 	}
 
 	now := time.Now()
-	dayStr := beego.Date(now, "Ymd")
+	dayStr := now.Format("2006-06-01")
 
 	billno := c.MchID + dayStr + util.RandomStr(10)
 

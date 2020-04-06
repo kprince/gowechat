@@ -5,9 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"kprince/gowechat/wxcontext"
 	"net/http"
-
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 //MchBase base mch

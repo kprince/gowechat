@@ -1,10 +1,9 @@
 package wxcontext
 
 import (
+	"kprince/gowechat/util"
 	"net/http"
 	"sync"
-
-	"github.com/yaotian/gowechat/util"
 )
 
 // Context struct

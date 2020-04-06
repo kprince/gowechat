@@ -5,14 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"kprince/gowechat/mp/message"
+	"kprince/gowechat/util"
+	"kprince/gowechat/wxcontext"
 	"reflect"
 	"runtime/debug"
 	"strconv"
 	"strings"
-
-	"github.com/yaotian/gowechat/mp/message"
-	"github.com/yaotian/gowechat/util"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 //MsgHandler struct

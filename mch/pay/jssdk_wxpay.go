@@ -4,11 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"kprince/gowechat/mch/base"
+	"kprince/gowechat/util"
 	"time"
 	"unicode/utf8"
-
-	"github.com/yaotian/gowechat/mch/base"
-	"github.com/yaotian/gowechat/util"
 )
 
 //OrderInput 下单

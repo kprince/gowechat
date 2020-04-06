@@ -3,11 +3,10 @@ package base
 import (
 	"fmt"
 	"io/ioutil"
+	"kprince/gowechat/util"
+	"kprince/gowechat/wxcontext"
 	"net/http"
 	"strings"
-
-	"github.com/yaotian/gowechat/util"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 //MpBase 微信公众平台,基本类

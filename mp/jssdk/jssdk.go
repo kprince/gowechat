@@ -3,10 +3,9 @@ package jssdk
 import (
 	"encoding/json"
 	"fmt"
+	"kprince/gowechat/util"
+	"kprince/gowechat/wxcontext"
 	"time"
-
-	"github.com/yaotian/gowechat/util"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 const getTicketURL = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi"

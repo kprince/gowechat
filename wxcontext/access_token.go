@@ -3,10 +3,9 @@ package wxcontext
 import (
 	"encoding/json"
 	"fmt"
+	"kprince/gowechat/util"
 	"sync"
 	"time"
-
-	"github.com/yaotian/gowechat/util"
 )
 
 const (

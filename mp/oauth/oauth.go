@@ -3,11 +3,10 @@ package oauth
 import (
 	"encoding/json"
 	"fmt"
+	"kprince/gowechat/util"
+	"kprince/gowechat/wxcontext"
 	"net/http"
 	"net/url"
-
-	"github.com/yaotian/gowechat/util"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 const (

@@ -2,12 +2,11 @@ package bridge
 
 import (
 	"fmt"
+	"kprince/gowechat/mp/oauth"
+	"kprince/gowechat/mp/user"
+	"kprince/gowechat/wxcontext"
 	"net/http"
 	"net/url"
-
-	"github.com/yaotian/gowechat/mp/oauth"
-	"github.com/yaotian/gowechat/mp/user"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 //PageOAuthHandler 微信网页授权

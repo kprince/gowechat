@@ -3,10 +3,10 @@ package gowechat
 
 import (
 	"fmt"
+	"kprince/gowechat/wxcontext"
 	"sync"
 
 	"github.com/astaxie/beego/cache"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 //memCache if wxcontext.Config no cache, this will give a default memory cache.

@@ -4,10 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"kprince/gowechat/mp/base"
+	"kprince/gowechat/wxcontext"
 	"net/url"
-
-	"github.com/yaotian/gowechat/mp/base"
-	"github.com/yaotian/gowechat/wxcontext"
 )
 
 const (
