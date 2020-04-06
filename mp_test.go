@@ -15,6 +15,5 @@ func TestGetQrcode(t *testing.T) {
 	}
 	wc := NewWechat(config)
 	beego.Debug("wechat's cache:", wc.Context.Cache)
-	mp, _ := wc.MpMgr()
-	mp.GetQrcode().CreatePermanentQRCodeWithSceneString("test")
+	_, _ = wc.MchMgr()
 }
