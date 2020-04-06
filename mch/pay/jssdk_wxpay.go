@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"kprince/gowechat/mch/base"
-	"kprince/gowechat/util"
+	"github.com/kprince/gowechat/mch/base"
+	"github.com/kprince/gowechat/util"
 	"time"
 	"unicode/utf8"
 )

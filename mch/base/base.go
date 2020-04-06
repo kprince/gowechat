@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"github.com/kprince/gowechat/wxcontext"
 	"io/ioutil"
-	"kprince/gowechat/wxcontext"
 	"net/http"
 )
 

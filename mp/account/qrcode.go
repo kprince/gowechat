@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"kprince/gowechat/mp/base"
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/mp/base"
+	"github.com/kprince/gowechat/wxcontext"
 	"net/url"
 )
 

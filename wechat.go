@@ -3,7 +3,7 @@ package gowechat
 
 import (
 	"fmt"
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/wxcontext"
 	"sync"
 
 	"github.com/astaxie/beego/cache"

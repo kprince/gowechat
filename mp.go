@@ -3,14 +3,14 @@
 package gowechat
 
 import (
-	"kprince/gowechat/mp/account"
-	"kprince/gowechat/mp/bridge"
-	"kprince/gowechat/mp/jssdk"
-	"kprince/gowechat/mp/material"
-	"kprince/gowechat/mp/menu"
-	"kprince/gowechat/mp/oauth"
-	"kprince/gowechat/mp/template"
-	"kprince/gowechat/mp/user"
+	"github.com/kprince/gowechat/mp/account"
+	"github.com/kprince/gowechat/mp/bridge"
+	"github.com/kprince/gowechat/mp/jssdk"
+	"github.com/kprince/gowechat/mp/material"
+	"github.com/kprince/gowechat/mp/menu"
+	"github.com/kprince/gowechat/mp/oauth"
+	"github.com/kprince/gowechat/mp/template"
+	"github.com/kprince/gowechat/mp/user"
 	"net/http"
 )
 

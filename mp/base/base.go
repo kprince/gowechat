@@ -2,9 +2,9 @@ package base
 
 import (
 	"fmt"
+	"github.com/kprince/gowechat/util"
+	"github.com/kprince/gowechat/wxcontext"
 	"io/ioutil"
-	"kprince/gowechat/util"
-	"kprince/gowechat/wxcontext"
 	"net/http"
 	"strings"
 )

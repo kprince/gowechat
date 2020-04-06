@@ -3,8 +3,8 @@ package jssdk
 import (
 	"encoding/json"
 	"fmt"
-	"kprince/gowechat/util"
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/util"
+	"github.com/kprince/gowechat/wxcontext"
 	"time"
 )
 

@@ -3,7 +3,7 @@ package material
 import (
 	"encoding/json"
 	"fmt"
-	"kprince/gowechat/util"
+	"github.com/kprince/gowechat/util"
 )
 
 //MediaType 媒体文件类型

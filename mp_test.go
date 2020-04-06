@@ -1,7 +1,7 @@
 package gowechat
 
 import (
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/wxcontext"
 	"testing"
 
 	"github.com/astaxie/beego"

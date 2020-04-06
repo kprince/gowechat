@@ -2,9 +2,9 @@ package template
 
 import (
 	"encoding/json"
-	"kprince/gowechat/mp/base"
-	"kprince/gowechat/util"
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/mp/base"
+	"github.com/kprince/gowechat/util"
+	"github.com/kprince/gowechat/wxcontext"
 )
 
 const (

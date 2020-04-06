@@ -3,8 +3,8 @@ package oauth
 import (
 	"encoding/json"
 	"fmt"
-	"kprince/gowechat/util"
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/util"
+	"github.com/kprince/gowechat/wxcontext"
 	"net/http"
 	"net/url"
 )

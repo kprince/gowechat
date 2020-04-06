@@ -2,9 +2,9 @@ package bridge
 
 import (
 	"fmt"
-	"kprince/gowechat/mp/oauth"
-	"kprince/gowechat/mp/user"
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/mp/oauth"
+	"github.com/kprince/gowechat/mp/user"
+	"github.com/kprince/gowechat/wxcontext"
 	"net/http"
 	"net/url"
 )

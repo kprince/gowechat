@@ -1,7 +1,7 @@
 package wxcontext
 
 import (
-	"kprince/gowechat/util"
+	"github.com/kprince/gowechat/util"
 	"net/http"
 	"sync"
 )

@@ -1,8 +1,8 @@
 package pay
 
 import (
-	"kprince/gowechat/mch/base"
-	"kprince/gowechat/wxcontext"
+	"github.com/kprince/gowechat/mch/base"
+	"github.com/kprince/gowechat/wxcontext"
 )
 
 //Pay pay
