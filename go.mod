@@ -1,4 +1,4 @@
-module kprince/gowechat
+module github.com/kprince/gowechat
 
 go 1.13
 
