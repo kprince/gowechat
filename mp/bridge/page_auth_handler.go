@@ -102,7 +102,7 @@ func (c *PageOAuthHandler) Handle() (err error) {
 		return nil
 	} else {
 		//code为空时
-		c.Redirect(c.getCallbackURL(), "snsapi_base", "base")
+		c.Redirect(c.getCallbackURL(), "snsapi_userinfo", "base")
 	}
 	return
 }
