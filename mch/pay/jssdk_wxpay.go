@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/kprince/gowechat/mch/base"
 	"github.com/kprince/gowechat/util"
+	"log"
 	"time"
 	"unicode/utf8"
 )
@@ -91,6 +92,53 @@ func (c *Pay) GetJsAPIConfig(order OrderInput) (config *WxPayInfo, err error) {
 
 	config.resultMap = result
 
+	return
+}
+
+/*DoRefund 发起退款
+ */
+func (c *Pay) DoRefund(orderNo, refundNo string, amount, refundAmount float32) (err error) {
+	nocestr := util.RandomStr(8)
+	timestamp := fmt.Sprint(time.Now().Unix())
+
+	result := make(map[string]string)
+	result["appId"] = c.AppID
+	result["timeStamp"] = timestamp
+	result["nonceStr"] = nocestr
+	result["out_trade_no"] = orderNo
+	result["out_refund_no"] = refundNo
+	result["total_fee"] = util.ToStr(int(amount * 100))
+	result["refund_fee"] = util.ToStr(int(refundAmount * 100))
+	result["signType"] = "MD5"
+
+	sign := base.Sign(result, c.MchAPIKey, nil)
+	result["paySign"] = sign
+	_, err = c.Refund(result)
+	if err != nil {
+		log.Printf("发起退款失败：%v", err)
+	}
+	return
+}
+
+/*QueryRefund 查询退款
+ */
+func (c *Pay) DoRefundQuery(refundNo string) (err error) {
+	nocestr := util.RandomStr(8)
+	timestamp := fmt.Sprint(time.Now().Unix())
+
+	result := make(map[string]string)
+	result["appId"] = c.AppID
+	result["timeStamp"] = timestamp
+	result["nonceStr"] = nocestr
+	result["out_refund_no"] = refundNo
+	result["signType"] = "MD5"
+
+	sign := base.Sign(result, c.MchAPIKey, nil)
+	result["paySign"] = sign
+	_, err = c.RefundQuery(result)
+	if err != nil {
+		log.Printf("查询退款失败：%v", err)
+	}
 	return
 }
 
