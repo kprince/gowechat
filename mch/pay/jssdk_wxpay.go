@@ -97,16 +97,16 @@ func (c *Pay) GetJsAPIConfig(order OrderInput) (config *WxPayInfo, err error) {
 
 /*DoRefund 发起退款
  */
-func (c *Pay) DoRefund(orderNo, refundNo string, amount, refundAmount float32) (err error) {
+func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount float32) (err error) {
 	nocestr := util.RandomStr(8)
 	timestamp := fmt.Sprint(time.Now().Unix())
-
 	result := make(map[string]string)
 	result["appId"] = c.AppID
 	result["timeStamp"] = timestamp
 	result["nonceStr"] = nocestr
 	result["out_trade_no"] = orderNo
 	result["out_refund_no"] = refundNo
+	result["notify_url"] = notifyUrl
 	result["total_fee"] = util.ToStr(int(amount * 100))
 	result["refund_fee"] = util.ToStr(int(refundAmount * 100))
 	result["signType"] = "MD5"
