@@ -97,7 +97,7 @@ func (c *Pay) GetJsAPIConfig(order OrderInput) (config *WxPayInfo, err error) {
 
 /*DoRefund 发起退款
  */
-func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount float32) (err error) {
+func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount float32) (params, resp map[string]string, err error) {
 	nocestr := util.RandomStr(8)
 	timestamp := fmt.Sprint(time.Now().Unix())
 	result := make(map[string]string)
@@ -113,16 +113,16 @@ func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount
 
 	sign := base.Sign(result, c.MchAPIKey, nil)
 	result["paySign"] = sign
-	_, err = c.Refund(result)
+	resp, err = c.Refund(result)
 	if err != nil {
 		log.Printf("发起退款失败：%v", err)
 	}
-	return
+	return result, resp, err
 }
 
 /*QueryRefund 查询退款
  */
-func (c *Pay) DoRefundQuery(refundNo string) (err error) {
+func (c *Pay) DoRefundQuery(refundNo string) (params, resp map[string]string, err error) {
 	nocestr := util.RandomStr(8)
 	timestamp := fmt.Sprint(time.Now().Unix())
 
@@ -135,11 +135,11 @@ func (c *Pay) DoRefundQuery(refundNo string) (err error) {
 
 	sign := base.Sign(result, c.MchAPIKey, nil)
 	result["paySign"] = sign
-	_, err = c.RefundQuery(result)
+	resp, err = c.RefundQuery(result)
 	if err != nil {
 		log.Printf("查询退款失败：%v", err)
 	}
-	return
+	return result, resp, err
 }
 
 //GetNativePayQrcodePicURL native支付时二维码图片的url
