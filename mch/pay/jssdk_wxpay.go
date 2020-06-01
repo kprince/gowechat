@@ -103,7 +103,6 @@ func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount
 	result := make(map[string]string)
 	result["appid"] = c.AppID
 	result["mch_id"] = c.MchID
-	result["timestamp"] = timestamp
 	result["nonce_str"] = nocestr
 	result["out_trade_no"] = orderNo
 	result["out_refund_no"] = refundNo
@@ -129,7 +128,6 @@ func (c *Pay) DoRefundQuery(refundNo string) (params, resp map[string]string, er
 
 	result := make(map[string]string)
 	result["appid"] = c.AppID
-	result["timestamp"] = timestamp
 	result["nonce_str"] = nocestr
 	result["out_refund_no"] = refundNo
 	result["sign_type"] = "MD5"
