@@ -99,7 +99,7 @@ func (c *Pay) GetJsAPIConfig(order OrderInput) (config *WxPayInfo, err error) {
  */
 func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount float32) (params, resp map[string]string, err error) {
 	nocestr := util.RandomStr(8)
-	timestamp := fmt.Sprint(time.Now().Unix())
+	//timestamp := fmt.Sprint(time.Now().Unix())
 	result := make(map[string]string)
 	result["appid"] = c.AppID
 	result["mch_id"] = c.MchID
@@ -124,7 +124,7 @@ func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount
  */
 func (c *Pay) DoRefundQuery(refundNo string) (params, resp map[string]string, err error) {
 	nocestr := util.RandomStr(8)
-	timestamp := fmt.Sprint(time.Now().Unix())
+	//timestamp := fmt.Sprint(time.Now().Unix())
 
 	result := make(map[string]string)
 	result["appid"] = c.AppID
