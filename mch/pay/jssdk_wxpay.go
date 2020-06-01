@@ -101,18 +101,19 @@ func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount
 	nocestr := util.RandomStr(8)
 	timestamp := fmt.Sprint(time.Now().Unix())
 	result := make(map[string]string)
-	result["appId"] = c.AppID
-	result["timeStamp"] = timestamp
-	result["nonceStr"] = nocestr
+	result["appid"] = c.AppID
+	result["mch_id"] = c.MchID
+	result["timestamp"] = timestamp
+	result["nonce_str"] = nocestr
 	result["out_trade_no"] = orderNo
 	result["out_refund_no"] = refundNo
 	result["notify_url"] = notifyUrl
 	result["total_fee"] = util.ToStr(int(amount * 100))
 	result["refund_fee"] = util.ToStr(int(refundAmount * 100))
-	result["signType"] = "MD5"
+	result["sign_type"] = "MD5"
 
 	sign := base.Sign(result, c.MchAPIKey, nil)
-	result["paySign"] = sign
+	result["sign"] = sign
 	resp, err = c.Refund(result)
 	if err != nil {
 		log.Printf("发起退款失败：%v", err)
@@ -127,14 +128,14 @@ func (c *Pay) DoRefundQuery(refundNo string) (params, resp map[string]string, er
 	timestamp := fmt.Sprint(time.Now().Unix())
 
 	result := make(map[string]string)
-	result["appId"] = c.AppID
-	result["timeStamp"] = timestamp
-	result["nonceStr"] = nocestr
+	result["appid"] = c.AppID
+	result["timestamp"] = timestamp
+	result["nonce_str"] = nocestr
 	result["out_refund_no"] = refundNo
-	result["signType"] = "MD5"
+	result["sign_type"] = "MD5"
 
 	sign := base.Sign(result, c.MchAPIKey, nil)
-	result["paySign"] = sign
+	result["sign"] = sign
 	resp, err = c.RefundQuery(result)
 	if err != nil {
 		log.Printf("查询退款失败：%v", err)
