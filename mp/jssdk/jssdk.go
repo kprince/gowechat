@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/kprince/gowechat/util"
 	"github.com/kprince/gowechat/wxcontext"
+	"log"
 	"time"
 )
 
@@ -96,6 +97,7 @@ func (js *Js) getTicketFromServer() (ticket resTicket, err error) {
 	var accessToken string
 	accessToken, err = js.GetAccessToken()
 	if err != nil {
+		log.Printf("Get Ticket error: %v", err)
 		return
 	}
 
@@ -104,15 +106,17 @@ func (js *Js) getTicketFromServer() (ticket resTicket, err error) {
 	response, err = util.HTTPGet(url)
 	err = json.Unmarshal(response, &ticket)
 	if err != nil {
+		log.Printf("Get Ticket error: %v", err)
 		return
 	}
 	if ticket.ErrCode != 0 {
 		err = fmt.Errorf("getTicket Error : errcode=%d , errmsg=%s", ticket.ErrCode, ticket.ErrMsg)
 		return
 	}
-
+	log.Printf("Get Ticket error: %v", err)
 	jsAPITicketCacheKey := fmt.Sprintf("jsapi_ticket_%s", js.AppID)
 	expires := ticket.ExpiresIn - 1500
+	//expires := 120
 	err = js.Cache.Put(jsAPITicketCacheKey, ticket.Ticket, time.Duration(expires)*time.Second)
 	return
 }

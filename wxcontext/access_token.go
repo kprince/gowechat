@@ -76,8 +76,8 @@ func (ctx *Context) GetAccessTokenFromServer() (resAccessToken ResAccessToken, e
 	}
 	log.Printf("Get AccessToken succeed: %v", resAccessToken.AccessToken)
 	accessTokenCacheKey := fmt.Sprintf("access_token_%s", ctx.AppID)
-	//expires := resAccessToken.ExpiresIn - 1500
-	expires := 120
+	expires := resAccessToken.ExpiresIn - 1500
+	//expires := 120
 	err = ctx.Cache.Put(accessTokenCacheKey, resAccessToken.AccessToken, time.Duration(expires)*time.Second)
 	return
 }
