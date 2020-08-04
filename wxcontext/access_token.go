@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/kprince/gowechat/util"
+	"log"
 	"sync"
 	"time"
 )
@@ -61,19 +62,22 @@ func (ctx *Context) GetAccessTokenFromServer() (resAccessToken ResAccessToken, e
 	var body []byte
 	body, err = util.HTTPGet(url)
 	if err != nil {
+		log.Printf("Get AccessToken failed: %v", err)
 		return
 	}
 	err = json.Unmarshal(body, &resAccessToken)
 	if err != nil {
+		log.Printf("Get AccessToken failed: %v", err)
 		return
 	}
 	if resAccessToken.ErrMsg != "" {
 		err = fmt.Errorf("get access_token error : errcode=%v , errormsg=%v", resAccessToken.ErrCode, resAccessToken.ErrMsg)
 		return
 	}
-
+	log.Printf("Get AccessToken succeed: %v", resAccessToken.AccessToken)
 	accessTokenCacheKey := fmt.Sprintf("access_token_%s", ctx.AppID)
-	expires := resAccessToken.ExpiresIn - 1500
+	//expires := resAccessToken.ExpiresIn - 1500
+	expires := 120
 	err = ctx.Cache.Put(accessTokenCacheKey, resAccessToken.AccessToken, time.Duration(expires)*time.Second)
 	return
 }
