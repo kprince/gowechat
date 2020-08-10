@@ -2,11 +2,14 @@ package pay
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/kprince/gowechat/mch/base"
 	"github.com/kprince/gowechat/util"
+	"github.com/nanjishidu/gomini/gocrypto"
 	"log"
+	"strings"
 	"time"
 	"unicode/utf8"
 )
@@ -288,5 +291,74 @@ func (c *Pay) CheckPayNotifyData(data []byte) (isSuccess bool, err error) {
 		}
 	}
 
+	return
+}
+
+//CheckPayNotifyData 检查pay notify url收到的消息，是否是返回成功
+func (c *Pay) CheckRefundNotifyData(data []byte) (isSuccess bool, refundNo string, err error) {
+	var msg map[string]string
+	msg, err = base.ParseXMLToMap(bytes.NewReader(data))
+	if err != nil {
+		return
+	}
+	ReturnCode, ok := msg["return_code"]
+	if ReturnCode == base.ReturnCodeSuccess || !ok {
+		haveAppId := msg["appid"]
+		if haveAppId != c.AppID {
+			err = fmt.Errorf("get appid is not same as mine. AppID from response is %s. My server AppID is %s,", haveAppId, c.AppID)
+			return
+		}
+
+		haveMchId := msg["mch_id"]
+		if haveMchId != c.MchID {
+			err = fmt.Errorf("get Mch id is not same as mine. MchID from response is %s. My server MchID is %s,", haveMchId, c.MchID)
+			return
+		}
+		reqInfo := msg["req_info"]
+		if reqInfo == "" {
+			err = fmt.Errorf("req_info is empty")
+			return
+		}
+		var bts []byte
+		bts, err = DecodeReqInfo(reqInfo, c.EncodingAESKey)
+		if err != nil {
+			return
+		}
+		msg, err = base.ParseXMLToMap(bytes.NewReader(bts))
+		outTradeNum, ok := msg["out_trade_no"]
+		if !ok || outTradeNum == "" {
+			err = fmt.Errorf("no out_trade_no")
+			return
+		}
+
+		refundStatus, ok := msg["refund_status"]
+		if !ok {
+			err = fmt.Errorf("no refund_status")
+			return
+		}
+		refundNo = msg["out_refund_no"]
+		if refundNo == "" {
+			err = fmt.Errorf("no refund_no")
+			return
+		}
+		if refundStatus == base.ResultCodeSuccess {
+			isSuccess = true
+		}
+	}
+	return
+}
+
+func DecodeReqInfo(reqInfo string, key string) (bts []byte, err error) {
+	bts, err = base64.StdEncoding.DecodeString(reqInfo)
+	if err != nil {
+		return
+	}
+	gocrypto.SetAesKey(strings.ToLower(gocrypto.Md5(key)))
+	bts, err = gocrypto.AesECBDecrypt(bts)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(bts))
 	return
 }
