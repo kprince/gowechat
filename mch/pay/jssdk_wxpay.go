@@ -320,7 +320,7 @@ func (c *Pay) CheckRefundNotifyData(data []byte) (isSuccess bool, refundNo strin
 			return
 		}
 		var bts []byte
-		bts, err = DecodeReqInfo(reqInfo, c.EncodingAESKey)
+		bts, err = DecodeReqInfo(reqInfo, c.MchAPIKey)
 		if err != nil {
 			return
 		}
