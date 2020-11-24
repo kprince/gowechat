@@ -109,13 +109,17 @@ func (js *Js) getTicketFromServer() (ticket resTicket, err error) {
 		log.Printf("Get Ticket error: %v", err)
 		return
 	}
-	if ticket.ErrCode != 0 {
+	//token过期，重新在服务器取
+	if ticket.ErrCode == 40001 {
+		js.GetAccessTokenFromServer()
+		return js.getTicketFromServer()
+	} else if ticket.ErrCode != 0 {
 		err = fmt.Errorf("getTicket Error : errcode=%d , errmsg=%s", ticket.ErrCode, ticket.ErrMsg)
 		return
 	}
 	log.Printf("Get Ticket error: %v", err)
 	jsAPITicketCacheKey := fmt.Sprintf("jsapi_ticket_%s", js.AppID)
-	expires := ticket.ExpiresIn - 1500
+	expires := ticket.ExpiresIn
 	//expires := 120
 	err = js.Cache.Put(jsAPITicketCacheKey, ticket.Ticket, time.Duration(expires)*time.Second)
 	return
