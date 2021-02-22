@@ -6,6 +6,8 @@ import "github.com/astaxie/beego/cache"
 type Config struct {
 	AppID          string
 	AppSecret      string
+	MiniAppID          string //小程序appid
+	MiniAppSecret      string //小程序secret
 	Token          string
 	EncodingAESKey string
 	Cache          cache.Cache

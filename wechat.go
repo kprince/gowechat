@@ -3,6 +3,7 @@ package gowechat
 
 import (
 	"fmt"
+	"github.com/kprince/gowechat/mini"
 	"github.com/kprince/gowechat/wxcontext"
 	"sync"
 
@@ -60,6 +61,28 @@ func (wc *Wechat) MpMgr() (mp *MpMgr, err error) {
 	return
 }
 
+//Mini 小程序
+func (wc *Wechat) Mini() (mp *mini.Mini, err error) {
+	err = wc.checkCfgMini()
+	if err != nil {
+		return
+	}
+	mp = new(mini.Mini)
+	ctx := new(wxcontext.Context)
+	cfg := wxcontext.Config{AppID: wc.Context.MiniAppID,AppSecret: wc.Context.MiniAppSecret}
+	if cfg.Cache == nil {
+		if memCache == nil {
+			memCache, _ = cache.NewCache("memory", `{"interval":60}`)
+		}
+		cfg.Cache = memCache
+	}
+	ctx.Config = &cfg
+	ctx.SetAccessTokenLock(new(sync.RWMutex))
+	ctx.SetJsAPITicketLock(new(sync.RWMutex))
+	mp.Context = ctx
+	return
+}
+
 //checkCfgBase 检查配置基本信息
 func (wc *Wechat) checkCfgBase() (err error) {
 	if wc.Context.AppID == "" {
@@ -70,6 +93,16 @@ func (wc *Wechat) checkCfgBase() (err error) {
 	}
 	if wc.Context.Token == "" {
 		return fmt.Errorf("%s", "配置中没有Token")
+	}
+	return
+}
+//checkCfgBase 检查配置基本信息
+func (wc *Wechat) checkCfgMini() (err error) {
+	if wc.Context.MiniAppID == "" {
+		return fmt.Errorf("%s", "配置中没有MiniAppID")
+	}
+	if wc.Context.MiniAppSecret == "" {
+		return fmt.Errorf("%s", "配置中没有MiniAppSecret")
 	}
 	return
 }
