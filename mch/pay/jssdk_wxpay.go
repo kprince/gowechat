@@ -9,6 +9,7 @@ import (
 	"github.com/kprince/gowechat/util"
 	"github.com/nanjishidu/gomini/gocrypto"
 	"log"
+	"math"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -100,7 +101,7 @@ func (c *Pay) GetJsAPIConfig(order OrderInput) (config *WxPayInfo, err error) {
 
 /*DoRefund 发起退款
  */
-func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount float32) (params, resp map[string]string, err error) {
+func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount float64) (params, resp map[string]string, err error) {
 	nocestr := util.RandomStr(8)
 	//timestamp := fmt.Sprint(time.Now().Unix())
 	result := make(map[string]string)
@@ -110,8 +111,10 @@ func (c *Pay) DoRefund(orderNo, refundNo, notifyUrl string, amount, refundAmount
 	result["out_trade_no"] = orderNo
 	result["out_refund_no"] = refundNo
 	result["notify_url"] = notifyUrl
-	result["total_fee"] = util.ToStr(int(amount * 100))
-	result["refund_fee"] = util.ToStr(int(refundAmount * 100))
+	fee := math.Round(amount *100)
+	result["total_fee"] = util.ToStr(int(fee))
+	refundFee := math.Round(refundAmount *100)
+	result["refund_fee"] = util.ToStr(int(refundFee))
 	result["sign_type"] = "MD5"
 
 	sign := base.Sign(result, c.MchAPIKey, nil)

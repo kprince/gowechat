@@ -3,8 +3,19 @@ package pay
 import (
 	"fmt"
 	"github.com/kprince/gowechat/wxcontext"
+	"log"
 	"testing"
 )
+
+func TestPay_DoRefund(t *testing.T) {
+	p := Pay{}
+	p.Context = &wxcontext.Context{Config: &wxcontext.Config{MchAPIKey: "1240291536688648192adcedsasdasda",AppID: "wx2469385b57e0731c",MchID: "1579040431"}}
+	var a float32
+	 a = 298.05*100
+	b := int(a)
+	log.Printf("%v=%v",a,b)
+	p.DoRefund("123456","123456","",298.05,20)
+}
 
 func TestPay_CheckRefundNotifyData(t *testing.T) {
 	str := "<xml><return_code>SUCCESS</return_code><appid><![CDATA[wx2469385b57e0731c]]></appid><mch_id><![CDATA[1579040431]]></mch_id><nonce_str><![CDATA[0d52d12be1e5ff44d511fbc7dc78778a]]></nonce_str><req_info><![CDATA[OpfXkyWatdXZK4x0rSSebzZM22knPNKzR6Fz0AuIHob5SGojgNtH2KXo81vn8kYGpy3fNAAq14j4+9TIBVK44Xslrql3VTz3ItXDFlzYRpWICxfr1O7gQ9ZOFrndFjbU9NlnHX6zJY1C0AFhOdmj8EGHXBUeetxMLaH57zo0k6pTAMh3A1GmQyFc16uYGc9HnXZLV1psAv9W+Jg2OBXUsTToPiBlTZotapW4LUOepgdMIoAFVbA8N9qXooGdBu1YdQiOI9WknaUPmsDEoo3C3FcUb1Mm78IRAM7HNekDSAow8fw2yajAA4bgoST9+rp5tecIp2Op3HxgZIF0oS05zauF5Huz8BNICEe1sPKBcpF+V8x64s8onUQ9P7P3I67uBMQqEFLTzqrMUx3QOX4px3OBIeHDya23DB7RIcTUDHFKBY1xhOtAiLKyhuxVONV9o4X4Vp4ljjoPnxZXtclKcM41OjLUhmsmp4CjIb5achwBu7dK3s+Fv4FooOWm0adHXe1pb4YIgzvb1Nt+I9jRZwWnPVqGPCfbdFmx82PtVda84VPfDh60a+due/LZZz81xTlXXZpHf3Uo+LWFw6WwyceQN4+Xg0t38x8gnnB3FfCJxGVObCXXjIZPklCdw5XexFJ/G4yBHu5y7K6yeZ0UrpEh9oeipQBrvXbAfpY1EECLxWGR1+8bESyiG9eKv+uiuCtyQdSWiNzrO5nT236+0+BFOvMDdHwNvvQ3njlKDTGKltcSiFA4UfeDlVpehLNS/TAAvvKpQiFGCKxBefJQE/wk1176LMacVyzB1i9D1ADfx04n/NtUHR0T+cfhCUgKG0g5SJU8sU5nO6Lng/7G2JGzRLDNJo6SsJ/pSa7yAw3ws4kxlvDM3sZMlOH8y13FQR98ONv8U9ILhpyw+/NX5sjE/cB+D5mGy156eJASLTtqFwzTGZcUEJtKyqpScFTVZpES2S3JwKrfu5FU218qVgD+iiHtUQYTpDzs2DW4Tj8/x/gVzxh3j7yFwNu4+PYSlANxVu3WBq4PCUHxzDMJuaffEw6WCKFpiKV0D+wmIelNCoTj1IRgyev24qTllqW0]]></req_info></xml>"
