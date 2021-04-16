@@ -23,7 +23,7 @@ func (m Mini) FilterContent(content string)([]byte,error){
 	params := map[string]interface{}{
 		"content":content,
 	}
-	response, err := m.HTTPPostJSONWithAccessToken(aQrUrl, &params)
+	response, err := m.HTTPPostJSONWithAccessToken(aContentUrl, &params)
 	if err != nil {
 		log.Println(err)
 	}
